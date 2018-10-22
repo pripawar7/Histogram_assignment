@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <h1 style="text-align:center">Histogram of Contributions to Candidates during 2015-2016 from Committees</h1>
+    <div id="myDiv"></div>
+    <script>
+        $.getJSON("data.json", function (data) {
+        data = $.parseJSON(data);
+        x=[];
+        y=[];
+        for (i in data){
+           x.push(i);
+           y.push(data[i]);
+        }
+        
+        data = [
+        {
+            histfunc: "sum",
+            y: y,
+            x: x,
+            type: "histogram",
+            name: "sum"
+        }
+        ]
+
+        Plotly.plot('myDiv', data)
+        });
+       
+    </script>
+  </body>
+
+</html>
